@@ -1,0 +1,30 @@
+
+
+<!-- Main Content -->
+<div class="w-3/4 p-4">
+  <table class="min-w-full bg-white">
+    <thead class="bg-amber-200 text-gray-600 uppercase text-sm leading-normal">
+    <tr>
+      <th class="py-3 px-6 text-left">First Name</th>
+      <th class="py-3 px-6 text-left">Last Name</th>
+      <th class="py-3 px-6 text-left">Email</th>
+      <th class="py-3 px-6 text-left">Phone</th>
+      <th class="py-3 px-6 text-left">Address</th>
+      <th class="py-3 px-6 text-left">Action</th>
+    </tr>
+    </thead>
+    <tbody *ngFor="let employee of employees" class="text-gray-600 text-sm font-light">
+    <tr class="border-b border-gray-200 hover:bg-gray-100">
+      <td class="py-3 px-6 text-left whitespace-nowrap">{{ employee.firstName }}</td>
+      <td class="py-3 px-6 text-left">{{ employee.lastName }}</td>
+      <td class="py-3 px-6 text-left">{{ employee.email }}</td>
+      <td class="py-3 px-6 text-left">{{ employee.phone }}</td>
+      <td class="py-3 px-6 text-left">{{ employee.address }}</td>
+      <td class="py-3 px-6 text-left"><button type="button" class="bg-blue-500 text-white px-2 py-1 rounded">Edit</button></td>
+    </tr>
+    </tbody>
+  </table>
+</div>
+
+
+<router-outlet/>
