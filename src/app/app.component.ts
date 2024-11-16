@@ -1,7 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {RouterLink, RouterLinkActive, RouterOutlet} from '@angular/router';
 import {Employee} from "./Backend/Employees/employee";
-import {EmployeeService} from "./Backend/Employees/employee.service";
 import {HttpErrorResponse} from "@angular/common/http";
 import {NgForOf} from "@angular/common";
 import {AdminDashboardComponent} from "./Features/admin/Components/admin-dashboard/admin-dashboard.component";
@@ -18,25 +17,17 @@ import {CartComponent} from "./Shared/Components/cart/cart.component";
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })
-export class AppComponent implements OnInit{
+export class AppComponent implements OnInit {
   title = 'AngularFrontend';
   public employees: Employee[] | undefined;
 
 
-  constructor(private employeeService : EmployeeService) {}
-  ngOnInit() {
-    this.getEmployees()
+  constructor() {
   }
 
-  public getEmployees():void{
-    this.employeeService.getEmployees().subscribe(
-      (employees) => {
-        this.employees = employees;
-      },(error:HttpErrorResponse) => {
-        console.log(error.message);
-      }
-    )
+  ngOnInit(): void {
   }
+
 
 
 

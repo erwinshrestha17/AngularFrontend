@@ -1,6 +1,6 @@
 import {Component, EventEmitter, Output} from '@angular/core';
 import {CurrencyPipe, NgClass} from "@angular/common";
-import {RouterLink, RouterOutlet} from "@angular/router";
+import {RouterLink, RouterLinkActive, RouterOutlet} from "@angular/router";
 
 
 
@@ -12,7 +12,8 @@ import {RouterLink, RouterOutlet} from "@angular/router";
     NgClass,
     CurrencyPipe,
     RouterOutlet,
-    RouterLink
+    RouterLink,
+    RouterLinkActive
   ],
   standalone: true
 })
@@ -21,6 +22,8 @@ export class CartComponent {
 
   @Output() closeCart = new EventEmitter<void>();
 
-
+  onBackdropClick() {
+    this.closeCart.emit();
+  }
 
 }

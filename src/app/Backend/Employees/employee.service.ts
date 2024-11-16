@@ -1,4 +1,4 @@
-import  {Observable} from "rxjs";
+/*import  {Observable} from "rxjs";
 import {Injectable} from "@angular/core";
 import {HttpClient} from "@angular/common/http";
 import {Employee} from "./employee";
@@ -26,3 +26,4 @@ export class EmployeeService {
     return this.http.delete<void>(`${this.apiUrl}/employee/delete/${employeeId}` )
   }
 }
+*/

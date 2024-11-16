@@ -12,37 +12,29 @@ import {ReviewsComponent} from "./Shared/Components/shop/reviews/reviews.compone
 import {LoginComponent} from "./Shared/Components/login/login.component";
 import {SignupComponent} from "./Shared/Components/signup/signup.component";
 import {PageNotFoundComponent} from "./Shared/Components/page-not-found/page-not-found.component";
+import {AuthService} from "./Core/Services/Auth/auth.service";
+import {AdminDashboardComponent} from "./Features/admin/Components/admin-dashboard/admin-dashboard.component";
 
 export const routes: Routes = [
   {path:'login',component:LoginComponent,title:"ShopEase| Log In"},
   {path:'signup',component:SignupComponent,title:"ShopEase| Sign Up"},
   {path:'home',component:HomeComponent,title:"ShopEase| Home"},
-  {path: 'shop', component: ShopComponent, title: "ShopEase | Shop",
+  {path:'',redirectTo:'/home',pathMatch:'full',},
+  {path: 'shop',component: ShopComponent, title: "ShopEase | Shop",
     children: [
-      {
-        path: 'description',
-        component: DescriptionComponent,
-        title: "ShopEase | Shop | Description"
-      },
-      {
-        path:'details',
-        component:DetailsComponent
-      },
-      {
-        path:'reviews',
-        component:ReviewsComponent
-      }
+      {path: 'description', component: DescriptionComponent, title: "ShopEase | Shop | Description"},
+      {path:'details', component:DetailsComponent},
+      {path:'reviews', component:ReviewsComponent},
+      {path:'',redirectTo:'/home',pathMatch:'full'},
     ]
   },
   {path:'categories',component:CategoriesComponent,title:"ShopEase| Categories"},
   {path:'aboutus',component:AboutusComponent,title:"ShopEase| About Us"},
   {path:'contact',component:ContactComponent,title:"ShopEase| Contact"},
-  {path:'',redirectTo:'/home',pathMatch:'full',},
   {path:'cart',component:CartComponent},
+  {path:'adminDashboard',component:AdminDashboardComponent},
   {path:"**",component:PageNotFoundComponent}
 ];
-
-
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
