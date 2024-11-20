@@ -1,0 +1,46 @@
+<section class="py-8 bg-gray-100">
+  <div class="container mx-auto px-4 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+    <div
+      class="bg-white shadow-md rounded-lg p-6 border border-gray-200"
+      *ngFor="let product of products"
+    >
+      <!-- Dummy Image -->
+      <div class="w-full h-48 bg-gray-200 rounded mb-4">
+          <img
+            src="https://via.placeholder.com/150"
+            alt="Product Image"
+            class="w-full h-full object-cover rounded"
+            loading="lazy"
+          />
+
+      </div>
+      <h2 class="text-lg font-semibold text-gray-800 mb-2">
+        {{ product.productName }}
+      </h2>
+      <p class="text-sm text-gray-600 mb-4">
+        {{ product.productDescription }}
+      </p>
+      <p class="text-sm text-gray-700">
+        <strong>Type:</strong> {{ product.productType }}
+      </p>
+      <p class="text-sm text-gray-700">
+        <strong>Size:</strong> {{ product.productSize }}
+      </p>
+      <p class="text-sm text-gray-700">
+        <strong>Price:</strong> ${{ product.productPrice }}
+      </p>
+      <p class="text-sm text-gray-700">
+        <strong>Category:</strong> {{ product.productCategory }}
+      </p>
+      <p
+        class="text-sm font-semibold"
+        [ngClass]="{
+          'text-green-600': product.productStatus === 'Available',
+          'text-red-600': product.productStatus === 'Out of Stock'
+        }"
+      >
+        {{ product.productStatus }}
+      </p>
+    </div>
+  </div>
+</section>

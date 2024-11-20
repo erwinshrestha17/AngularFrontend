@@ -1,40 +1,40 @@
 import {RouterModule, Routes} from '@angular/router';
 import {NgModule} from "@angular/core";
-import {CartComponent} from "./Shared/Components/cart/cart.component";
-import {HomeComponent} from "./Shared/Components/home/home.component";
-import {ContactComponent} from "./Shared/Components/contact/contact.component";
-import {ShopComponent} from "./Shared/Components/shop/shop.component";
-import {CategoriesComponent} from "./Shared/Components/categories/categories.component";
-import {AboutusComponent} from "./Shared/Components/aboutus/aboutus.component";
-import {DescriptionComponent} from "./Shared/Components/shop/description/description.component";
-import {DetailsComponent} from "./Shared/Components/shop/details/details.component";
-import {ReviewsComponent} from "./Shared/Components/shop/reviews/reviews.component";
-import {LoginComponent} from "./Shared/Components/login/login.component";
-import {SignupComponent} from "./Shared/Components/signup/signup.component";
+import {UserComponent} from "./Features/user/user.component";
 import {PageNotFoundComponent} from "./Shared/Components/page-not-found/page-not-found.component";
-import {AuthService} from "./Core/Services/Auth/auth.service";
-import {AdminDashboardComponent} from "./Features/admin/Components/admin-dashboard/admin-dashboard.component";
+import {ShopComponent} from "./Features/user/Components/shop/shop.component";
 
 export const routes: Routes = [
-  {path:'login',component:LoginComponent,title:"ShopEase| Log In"},
-  {path:'signup',component:SignupComponent,title:"ShopEase| Sign Up"},
-  {path:'home',component:HomeComponent,title:"ShopEase| Home"},
-  {path:'',redirectTo:'/home',pathMatch:'full',},
-  {path: 'shop',component: ShopComponent, title: "ShopEase | Shop",
+  {path: 'admin', loadComponent: () => import('./Features/admin/admin.component').then(m => m.AdminComponent)},
+  {path: 'dashboard', loadComponent: () => import('./Features/admin/Components/dashboard/dashboard.component').then(m => m.DashboardComponent) },
+  {path: 'user', component: UserComponent, title: "ShopEase | User",
     children: [
-      {path: 'description', component: DescriptionComponent, title: "ShopEase | Shop | Description"},
-      {path:'details', component:DetailsComponent},
-      {path:'reviews', component:ReviewsComponent},
-      {path:'',redirectTo:'/home',pathMatch:'full'},
+      { path: '', redirectTo: 'home', pathMatch: 'full' },
+      { path: 'home', loadComponent: () => import('./Features/user/Components/home/home.component').then(m => m.HomeComponent) },
+      {
+        path: 'shop',
+        component: ShopComponent,
+        title: "ShopEase | Shop",
+        children: [
+          { path: '', redirectTo: 'description', pathMatch: 'full' },
+          { path: 'description', loadComponent: () => import('./Features/user/Components/shop/description/description.component').then(m => m.DescriptionComponent) },
+          { path: 'details', loadComponent: () => import('./Features/user/Components/shop/details/details.component').then(m => m.DetailsComponent) },
+          { path: 'reviews', loadComponent: () => import('./Features/user/Components/shop/reviews/reviews.component').then(m => m.ReviewsComponent) },
+        ]
+      },
+      { path: 'categories', loadComponent: () => import('./Features/user/Components/categories/categories.component').then(m => m.CategoriesComponent) },
+      { path: 'about', loadComponent: () => import('./Features/user/Components/aboutus/about.component').then(m => m.AboutComponent) },
+      { path: 'contact', loadComponent: () => import('./Features/user/Components/contact/contact.component').then(m => m.ContactComponent) },
+      { path: 'cart', loadComponent: () => import('./Features/user/Components/cart/cart.component').then(m => m.CartComponent) },
+      { path: 'login', loadComponent: () => import('./Features/user/Components/login/login.component').then(m => m.LoginComponent) },
+      { path: 'signup', loadComponent: () => import('./Features/user/Components/signup/signup.component').then(m => m.SignupComponent) },
+      { path: '**', component: PageNotFoundComponent },  // Catch-all 404 route inside the 'user' scope
     ]
   },
-  {path:'categories',component:CategoriesComponent,title:"ShopEase| Categories"},
-  {path:'aboutus',component:AboutusComponent,title:"ShopEase| About Us"},
-  {path:'contact',component:ContactComponent,title:"ShopEase| Contact"},
-  {path:'cart',component:CartComponent},
-  {path:'adminDashboard',component:AdminDashboardComponent},
-  {path:"**",component:PageNotFoundComponent}
+  { path: '', redirectTo: '/user', pathMatch: 'full' },
+  { path: '**', component: PageNotFoundComponent } // Global 404 for unmatched routes
 ];
+
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
